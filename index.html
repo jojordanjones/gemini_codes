@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Google AI Ecosystem: An Interactive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to bottom right, #f0fdfa, #f8fafc);
+            color: #334155;
+        }
+        .card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .modal-backdrop {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .filter-btn.active {
+            background-color: #0d9488;
+            color: white;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+        .filter-btn {
+            transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="bg-white shadow-sm">
+    <div class="container mx-auto px-4 py-6 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-slate-800">Google's Generative AI Ecosystem</h1>
+        <p class="mt-2 text-lg text-slate-600">An interactive guide to the tools shaping the future of AI.</p>
+    </div>
+</header>
+
+<main class="container mx-auto p-4 md:p-8">
+    <section id="overview" class="mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-2">Ecosystem at a Glance</h2>
+        <p class="text-center text-slate-600 max-w-3xl mx-auto mb-8">This dashboard visualizes Google's expansive suite of generative AI tools. The chart below shows the distribution of products across key categories, highlighting the company's strategic focus. Use the filters to explore the tools that interest you most.</p>
+        <div class="chart-container">
+            <canvas id="ecosystemChart"></canvas>
+        </div>
+    </section>
+
+    <section id="explorer">
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-6">Interactive Tool Explorer</h2>
+        <div id="filters" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8"></div>
+        <div id="tool-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+    </section>
+
+    <section id="strategy" class="mt-16 bg-white p-6 md:p-8 rounded-xl shadow-md">
+        <h2 class="text-2xl md:text-3xl font-bold text-center text-slate-800 mb-8">Visualizing Google's AI Strategy</h2>
+        <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-12">
+            <div id="funnel-strategy">
+                <h3 class="font-bold text-xl text-slate-700 mb-4 text-center">The "Funnel Strategy"</h3>
+                <p class="text-slate-600 mb-6 text-center">Google uses free, experimental tools to attract a wide audience, then guides engaged users toward powerful, subscription-based professional platforms.</p>
+                <div class="relative flex flex-col items-center space-y-1">
+                    <div class="w-2/3 md:w-1/2 p-3 bg-teal-100 text-teal-800 rounded-t-xl text-center">
+                        <p class="font-semibold">Awareness & Experimentation</p>
+                        <p class="text-sm">AI Test Kitchen, Google Labs (ImageFX, MusicFX, VideoFX)</p>
+                    </div>
+                    <div class="w-full md:w-2/3 p-4 bg-teal-200 text-teal-800 text-center">
+                        <p class="font-semibold">Professional & Enterprise</p>
+                        <p class="text-sm">Google AI Subscriptions, Workspace (Flow, Project Mariner, Google Vids)</p>
+                    </div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <div class="w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-12 border-t-teal-500 animate-bounce"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="agentic-spectrum">
+                <h3 class="font-bold text-xl text-slate-700 mb-4 text-center">The "Agentic Spectrum"</h3>
+                <p class="text-slate-600 mb-6 text-center">Google offers a range of AI assistance, from real-time helpers to fully autonomous agents, easing users into a future of delegation.</p>
+                <div class="w-full bg-slate-200 rounded-full h-8 flex items-center p-1">
+                    <div class="bg-sky-400 h-full rounded-l-full flex-1 text-center text-white text-xs md:text-sm font-semibold flex items-center justify-center">Co-pilot</div>
+                    <div class="bg-sky-500 h-full flex-1 text-center text-white text-xs md:text-sm font-semibold flex items-center justify-center">Collaborator</div>
+                    <div class="bg-sky-600 h-full rounded-r-full flex-1 text-center text-white text-xs md:text-sm font-semibold flex items-center justify-center">Autonomous</div>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mt-2 text-center text-xs text-slate-500">
+                    <div>Gemini Code Assist</div>
+                    <div>AI-first Colab</div>
+                    <div>Jules, Project Mariner</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="text-center py-6 mt-8">
+    <p class="text-slate-500 text-sm">Interactive dashboard created to analyze and explore Google's Generative AI Ecosystem.</p>
+</footer>
+
+<div id="modal-backdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+<div id="tool-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 hidden">
+    <div class="modal-content bg-white w-full max-w-4xl max-h-[90vh] rounded-2xl shadow-2xl flex flex-col transform scale-95 opacity-0">
+        <div class="flex justify-between items-center p-4 border-b border-slate-200">
+            <h2 id="modal-title" class="text-2xl font-bold text-slate-800"></h2>
+            <button id="close-modal-btn" class="text-slate-500 hover:text-red-600 transition-colors">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <div id="modal-body" class="p-6 overflow-y-auto"></div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const aiTools = [
+        { name: 'ImageFX', category: 'Creative', icon: '🎨', tagline: 'Text-to-image generation with iterative prompt refinement.', description: "ImageFX is Google's flagship tool for creating high-quality, synthetic images from text descriptions. Powered by Imagen 3, its standout feature is 'Expressive Chips,' which offer dynamic keyword suggestions to help users intuitively explore creative variations without rewriting prompts. All creations are watermarked with SynthID for responsibility.", tech: ['Imagen 3', 'SynthID'], useCases: [
+            { title: 'Social Media Content', text: 'A small business can generate a stream of unique, professional-quality images for their Instagram feed, such as lifestyle product shots or daily specials, without the cost of a photoshoot.' },
+            { title: 'Conceptual Art for Presentations', text: 'A marketing professional can create conceptual visuals for a pitch and use Expressive Chips to quickly show stakeholders different campaign aesthetics (e.g., cinematic, minimalist, anime).' },
+            { title: 'Inspiration for Artists', text: 'A digital artist can use ImageFX as a brainstorming partner, inputting a core concept to generate multiple visual interpretations and spark new ideas for personal projects.' }
+        ]},
+        { name: 'Whisk', category: 'Creative', icon: '🍳', tagline: 'Visual remixing and ideation using image inputs.', description: 'Whisk offers a different approach to image creation by starting with visuals instead of text. Users upload reference images for subject, scene, and style. The Gemini model analyzes these to generate a new prompt for Imagen 3, creating a visual "remix." It also features Whisk Animate (powered by Veo 2) to turn generated images into short video clips.', tech: ['Gemini', 'Imagen 3', 'Veo 2', 'SynthID'], useCases: [
+            { title: 'Creative Mashups', text: 'A graphic designer can combine a photo of their cat (subject), a NASA spacesuit (style), and a desert landscape (scene) to create unique "cat astronaut" character concepts.' },
+            { title: 'Product Visualization', text: 'An Etsy seller can upload a child’s drawing (subject) and a photo of fleece fabric (style) to generate a realistic preview of what a custom plush toy would look like.' },
+            { title: 'Animated Social Posts', text: 'A museum can generate an image of a "vintage robot in a zen garden," then use Whisk Animate to add subtle motion, like steam rising from a teacup, for an engaging social media loop.' }
+        ]},
+        { name: 'MusicFX', category: 'Creative', icon: '🎵', tagline: 'Text-to-music and soundscape generation.', description: 'MusicFX translates text descriptions into unique musical compositions and soundscapes. Users can specify genre, mood, and instrumentation. Its "DJ Mode" allows for real-time mixing of different AI-generated loops, turning the tool into a performance instrument. All audio is watermarked with SynthID.', tech: ['MusicLM', 'SynthID'], useCases: [
+            { title: 'Royalty-Free Background Music', text: 'A YouTuber can prompt for a "lo-fi hip hop beat with koto flute" to create a custom, royalty-free soundtrack for a travel vlog, avoiding copyright issues.' },
+            { title: 'Podcast Intros and Outros', text: 'A podcaster can generate a distinctive theme song by prompting for a "dark, suspenseful synthwave track with a driving 80s drum beat" for their show.' },
+            { title: 'Atmosphere for Tabletop RPGs', text: 'A Dungeon Master can quickly generate "tense, ominous cavern ambience with dripping water" to enhance immersion during a Dungeons & Dragons session.' }
+        ]},
+        { name: 'TextFX', category: 'Creative', icon: '✍️', tagline: 'A suite of 10 creative writing and language tools.', description: 'Developed in collaboration with rapper Lupe Fiasco, TextFX is a specialized suite of ten tools (Simile, Explode, Unexpect, etc.) designed to help writers play with language and overcome creative blocks. It encourages unconventional approaches to brainstorming and text generation.', tech: ['PaLM 2'], useCases: [
+            { title: 'Songwriting and Poetry', text: 'A songwriter can use the "Simile" tool on the word "love" to get fresh metaphors, or the "Unexpect" tool to generate poignant and complex lines like "I love you like a ghost loves its unfinished business."' },
+            { title: 'Marketing Copywriting', text: 'An advertiser can use the "Fuse" tool with "vacuum cleaner" and "black hole" to generate compelling taglines like "The event horizon for dust."' },
+            { title: 'Creative Writing Prompts', text: 'A fiction writer can use the "Scene" tool with "a detective\'s office at midnight" to get a rich, atmospheric paragraph to kickstart a new chapter.' }
+        ]},
+        { name: 'VideoFX / Flow / Vids', category: 'Creative', icon: '🎬', tagline: 'A tiered suite for AI video creation.', description: 'Google offers three distinct video tools: <strong>VideoFX</strong> is the experimental entry point for turning text/images into short clips. <strong>Flow</strong> is the professional, subscription-based filmmaking tool with advanced camera controls and character consistency. <strong>Google Vids</strong> is a Workspace productivity tool for creating informational work videos (e.g., sales reports, training).', tech: ['Veo 2', 'Veo 3', 'Imagen 4', 'Gemini'], useCases: [
+            { title: '(VideoFX) Quick Social Media Ad', text: 'A local flower shop can prompt for "a time-lapse of a red rose blooming" to generate a simple, elegant video for an Instagram promotion.' },
+            { title: '(Flow) Independent Short Film Scene', text: 'A filmmaker can upload character concept art and prompt a complex scene, ensuring the character\'s appearance remains consistent across multiple shots.' },
+            { title: '(Google Vids) Quarterly Sales Update', text: 'A manager can link a Google Sheet and ask Vids to create a 2-minute video summarizing sales performance, complete with animated charts and an AI-generated script.' }
+        ]},
+        { name: 'Jules', category: 'Developer', icon: '🤖', tagline: 'Asynchronous, autonomous coding agent for repositories.', description: 'Jules is an agentic coding assistant that works autonomously in the background. Developers delegate high-level tasks like "fix this bug" or "update dependencies." Jules clones the repo, formulates a plan for approval, executes the code changes, and submits a pull request for final human review.', tech: ['Gemini 2.5 Pro'], useCases: [
+            { title: 'Clearing Technical Debt', text: 'A team can assign Jules the tedious task of upgrading a legacy application\'s Node.js version, letting it handle all dependency conflicts and code modifications automatically.' },
+            { title: 'Automated Bug Fixing & Testing', text: 'A project manager can assign a GitHub issue URL to Jules. The agent will read the bug report, write a fix, generate a new unit test, and open a pull request that links to the original issue.' }
+        ]},
+        { name: '/Code', category: 'Developer', icon: '💻', tagline: 'AI code generation, completion, and assistance.', description: 'This suite of assistive technologies includes the <strong>Codey APIs</strong> (for building custom tools) and <strong>Gemini Code Assist</strong> (an in-IDE pair programmer). It provides real-time code suggestions, generates functions, identifies security vulnerabilities, and suggests fixes.', tech: ['Gemini', 'Codey'], useCases: [
+            { title: 'Accelerating Feature Development', text: 'A developer building a React component can get boilerplate code generated automatically, and as they write, the assistant flags potential security issues and provides corrected code.' },
+            { title: 'Data Analysis Scripting', text: 'An analyst can use the Gemini API to ask in natural language for a complex data operation, and the model will generate and execute the Python code to perform the calculation and return the result.' }
+        ]},
+        { name: 'AI-first Colab', category: 'Developer', icon: '🔬', tagline: 'Agentic AI collaborator within Jupyter notebooks.', description: 'A reimagined Google Colab that acts as an "agentic collaborator." Powered by Gemini 2.5 Flash, it understands the full context of a notebook and can autonomously perform complex, multi-cell tasks like end-to-end data analysis from a single prompt. It also features intelligent error fixing.', tech: ['Gemini 2.5 Flash'], useCases: [
+            { title: 'Exploratory Data Analysis', text: 'A researcher can upload a dataset and give a single prompt to "analyze trends, calculate averages, and generate a visualization." Colab will autonomously write and execute all necessary code.' },
+            { title: 'Learning Machine Learning', text: 'When a student encounters a coding error, the AI not only highlights it but provides a corrected version with a natural language explanation of why the error occurred.' }
+        ]},
+        { name: 'Firebase Studio', category: 'Developer', icon: '🛠️', tagline: 'Online IDE for full-stack AI app development.', description: 'An online IDE built on VS Code for creating full-stack AI apps. It comes with templates, a built-in Gemini assistant, and deep integration with Google services. It can intelligently detect when an app needs a backend and assist in provisioning it automatically.', tech: ['Gemini', 'VS Code-based'], useCases: [
+            { title: 'Rapid App Prototyping', text: 'A founder can import a Figma design, which is automatically converted into React code. As they build, the AI detects the need for user auth and a database, guiding them through setup.' },
+            { title: 'Full-Stack Development in the Cloud', text: 'A developer can build a "store locator" feature entirely in the browser, using the AI to generate the map component, the cloud function, and test it on built-in mobile emulators.' }
+        ]},
+        { name: 'Stitch', category: 'Developer', icon: '🧵', tagline: 'AI tool for generating UI designs from prompts/sketches.', description: 'Stitch accelerates early-stage app development by generating UI designs from text prompts, hand-drawn sketches, or screenshots. It bridges the gap between design and development by exporting to both Figma and functional HTML/CSS code.', tech: ['Generative AI'], useCases: [
+            { title: 'Validating an App Idea', text: 'A product manager can prompt for "a UI for a flashcard app" and get multiple visual concepts in minutes to share with stakeholders for quick feedback.' },
+            { title: 'Accelerating Designer-Developer Handoff', text: 'A designer can upload a whiteboard sketch, convert it to a digital UI, make conversational tweaks, and export to both Figma and HTML/CSS for the developer.' }
+        ]},
+        { name: 'Help Me Script', category: 'Developer', icon: '🏡', tagline: 'Generates home automation scripts from natural language.', description: 'An experimental Google Home feature that translates natural language descriptions into executable automation scripts. It democratizes smart home automation by removing the need to learn a complex scripting language.', tech: ['Generative AI'], useCases: [
+            { title: 'Creating a "Morning" Routine', text: 'A user can describe: "On weekdays at 6:30 AM, slowly brighten my lights, play my morning playlist, and start brewing coffee," and the tool generates the script.' },
+            { title: 'Building an Advanced Security Routine', text: 'A homeowner can create a script like: "If my back camera detects a person after 11 PM, turn on floodlights, play a dog barking sound, and send a critical notification to my phone."' }
+        ]},
+        { name: 'AI Overviews & AI Mode', category: 'Productivity', icon: '🔍', tagline: 'Generative AI integrated directly into Google Search.', description: '<strong>AI Overviews</strong> provide quick, synthesized snapshots at the top of search results. <strong>AI Mode</strong> offers a more powerful, conversational experience, breaking down complex queries and synthesizing information from a much broader set of sources for comprehensive, reasoned answers.', tech: ['Gemini'], useCases: [
+            { title: '(Overviews) Quick Fact-Finding', text: 'A user searching for a "buttermilk substitute" gets a direct, concise answer at the top of the page, saving them from clicking through multiple blogs.' },
+            { title: '(AI Mode) Complex Research Planning', text: 'A student can ask AI Mode to "plan a research paper on solar vs. wind energy," and it will generate a structured outline with links to relevant sources for each section.' },
+            { title: '(AI Mode) Multi-Step Trip Planning', text: 'A traveler can plan a trip by asking sequential, context-aware questions, like "Create a 10-day Italy itinerary," followed by "Now find a cooking class in Rome for that portion."' }
+        ]},
+        { name: 'NotebookLM', category: 'Productivity', icon: '📚', tagline: 'AI research assistant grounded in your provided sources.', description: "A virtual research assistant that is grounded in the user's own source material (PDFs, Docs, websites, YouTube transcripts). It answers questions based *only* on the provided content, providing inline citations to combat hallucination and increase reliability. Features include Audio Overviews and source discovery.", tech: ['Gemini'], useCases: [
+            { title: '(Students) Creating a Study Guide', text: 'A student can upload all their lecture notes and readings, then ask, "Create a timeline of key events, citing the sources for each one."' },
+            { title: '(Researchers) Synthesizing Literature', text: 'A medical researcher can upload 20 papers and ask, "Summarize the conflicting findings regarding this gene across these papers," getting a synthesized answer with citations.' },
+            { title: '(Journalists) Analyzing Interviews', text: 'A journalist can upload interview transcripts and ask, "Find all instances where interviewees mentioned \'Project Nightingale\' and create a briefing document."' }
+        ]},
+        { name: 'Ask Photos', category: 'Productivity', icon: '🖼️', tagline: 'Conversational search for your Google Photos library.', description: 'An experimental feature that uses Gemini to enable natural language search of a personal photo library. Users can ask questions like "show me the best photos of my dog from last summer" or "what theme was my daughter\'s 5th birthday party?"', tech: ['Gemini'], useCases: [
+            { title: 'Reliving Memories', text: 'A user can ask, "Show me photos of my family\'s beach vacations over the years," and the AI will create a visual timeline by identifying recurring people and places.' },
+            { title: 'Finding Specific Information', text: 'A user can find their car\'s license plate number by asking, "show me a clear photo of the back of my car," saving them from manually searching their library.' }
+        ]},
+        { name: 'Gen AI in Chrome', category: 'Productivity', icon: '🌐', tagline: 'AI features integrated into the Chrome browser.', description: 'A suite of AI features built into Chrome, including an AI-powered <strong>Tab Organizer</strong>, an AI <strong>Theme Creator</strong>, a "<strong>Help me write</strong>" tool for refining text on any webpage, and a persistent <strong>Gemini in Chrome</strong> panel for contextual summaries and brainstorming.', tech: ['Gemini'], useCases: [
+            { title: 'Managing Research Projects', text: 'A student with 30 open tabs can use the Tab Organizer to automatically group them into relevant categories like "Historical Context" and "Case Studies."' },
+            { title: 'Crafting a Product Review', text: 'A customer can write a brief comment, then use "Help me write" to elaborate it into a more detailed and helpful review.' },
+            { title: 'Understanding Complex Articles', text: 'While reading a dense article, a user can open Gemini in Chrome and ask it to "Explain this concept in simple terms" without leaving the page.' }
+        ]},
+        { name: 'Portraits', category: 'Productivity', icon: '💬', tagline: 'Conversational AI coaching from real, trusted experts.', description: 'An experiment that creates conversational AI avatars of real experts, trained exclusively on their authentic content. The first Portrait features Kim Scott, author of *Radical Candor*, acting as an AI leadership coach that provides advice in her voice and style.', tech: ['Gemini'], useCases: [
+            { title: 'Practicing Difficult Conversations', text: 'A new manager can role-play giving critical feedback with the Kim Scott Portrait to practice their phrasing and approach based on Radical Candor principles.' },
+            { title: 'Getting On-Demand Leadership Advice', text: 'An executive can consult the Portrait for a quick, private coaching session on topics like imposter syndrome, getting advice that is more accessible than a human coach.' }
+        ]},
+        { name: 'Career Dreamer', category: 'Productivity', icon: '💼', tagline: 'AI-powered career exploration and planning tool.', description: 'An experimental tool that helps individuals with non-traditional career paths explore possibilities by analyzing their life experiences, skills, and interests. It suggests career paths and helps draft resumes and cover letters.', tech: ['Gemini', 'Lightcast data'], useCases: [
+            { title: 'Translating Life Experience', text: 'A military veteran can input their experience, and the tool will translate it into marketable skills like "project management" and "strategic planning," suggesting relevant civilian careers.' },
+            { title: 'Pivoting Careers', text: 'A retail worker with a passion for sustainability can use the tool to identify transferable skills and discover emerging roles in the green economy.' }
+        ]},
+        { name: 'Project Astra', category: 'Experimental', icon: '🌟', tagline: 'Research prototype for a universal, multimodal AI assistant.', description: 'Project Astra is the vision for a universal AI assistant that understands context in real-time through continuous video and audio. Conceived as a proactive agent that works across devices (phones, smart glasses), it aims to remember context, reason about the world, and take helpful action.', tech: ['Gemini'], useCases: [
+            { title: 'Real-World Navigation', text: 'A tourist wearing prototype glasses can look at a statue and ask, "What\'s the story behind this?" Astra identifies it and provides a spoken history.' },
+            { title: 'Interactive Problem Solving', text: 'A user can point their phone at a broken appliance, and Astra can retrieve the manual from their files and provide step-by-step visual and spoken repair instructions.' }
+        ]},
+        { name: 'Project Mariner', category: 'Experimental', icon: '🚢', tagline: 'Experimental AI agent for automating complex web tasks.', description: 'A research prototype AI agent designed to autonomously navigate the internet and perform multi-step tasks. It runs on cloud VMs, observing a virtual browser to click, scroll, and fill out forms to achieve a user\'s goal, such as applying for jobs or booking travel.', tech: ['Gemini 2.0'], useCases: [
+            { title: 'Automated Job Applications', text: 'A user can instruct Mariner to "Apply to all remote software engineering jobs posted on LinkedIn in the last 24 hours," and the agent will find and fill out the applications.' },
+            { title: 'Complex Travel Research', text: 'A user can ask Mariner to "Find the cheapest flights and a 4-star hotel for a trip," and the agent will search multiple sites in parallel and present the best combined option.' }
+        ]},
+        { name: 'SynthID Detector', category: 'Experimental', icon: '🛡️', tagline: 'Verification portal to identify AI-generated content.', description: 'SynthID is a technology for invisibly watermarking AI-generated media. The Detector is a public-facing portal where users (journalists, researchers) can upload media to scan it for a SynthID watermark, helping to combat misinformation and verify authenticity.', tech: ['SynthID detection models'], useCases: [
+            { title: 'Fact-Checking for Journalists', text: 'A journalist can upload a suspicious image of a political event to the Detector. If a watermark is found, they know it\'s AI-generated and not an authentic photo.' },
+            { title: 'Content Moderation for Platforms', text: 'A social media platform could integrate the SynthID API to automatically scan and label uploaded content as "AI-Generated" for transparency.' }
+        ]},
+        { name: 'Food Mood', category: 'Arts & Culture', icon: '🍲', tagline: 'A playful fusion recipe generator for creative inspiration.', description: 'A Google Arts & Culture experiment that generates unique fusion recipes. Users select two national cuisines, and the AI creates a novel recipe that combines elements from both, complete with instructions and an AI-generated photo of the dish.', tech: ['Gemini 1.0 Pro'], useCases: [
+            { title: 'Breaking a Cooking Rut', text: 'A home cook can select "Thai" and "Mexican" to get an inspirational recipe for "Green Curry Carnitas Tacos," trying something new and exciting for dinner.' },
+            { title: 'Themed Dinner Party Challenge', text: 'A group of friends can each use the tool with a random combination of cuisines to create a fun, experimental, and memorable meal together.' }
+        ]},
+        { name: 'Say What You See', category: 'Arts & Culture', icon: '🖼️', tagline: 'A game to learn the art of prompting for AI image generation.', description: 'A game that teaches users how to write effective prompts for AI image generators. It shows an AI image and tasks the player with writing a text prompt to recreate it, scoring them on visual similarity and providing tips for improvement.', tech: ['Google AI'], useCases: [
+            { title: 'Training for AI Art Generation', text: 'An aspiring digital artist can play the game to practice translating visual ideas into effective text, learning that a detailed prompt is more effective than a simple one.' },
+            { title: 'Fun Introduction to AI Concepts', text: 'A parent can play with their child to provide a simple, hands-on lesson in how AI models interpret language to create images.' }
+        ]}
+    ];
+
+    const toolGrid = document.getElementById('tool-grid');
+    const filtersContainer = document.getElementById('filters');
+    const modal = document.getElementById('tool-modal');
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+
+    const categories = ['All', ...new Set(aiTools.map(tool => tool.category))];
+
+    function createFilters() {
+        categories.forEach(category => {
+            const button = document.createElement('button');
+            button.className = 'filter-btn px-4 py-2 rounded-full text-sm font-semibold bg-white text-slate-600 shadow-sm hover:bg-slate-100';
+            if (category === 'All') button.classList.add('active');
+            button.textContent = category;
+            button.dataset.category = category;
+            button.addEventListener('click', () => filterTools(category));
+            filtersContainer.appendChild(button);
+        });
+    }
+
+    function filterTools(category) {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.category === category);
+        });
+        document.querySelectorAll('.card-wrapper').forEach(wrapper => {
+            const cardCategory = wrapper.dataset.category;
+            wrapper.classList.toggle('hidden', category !== 'All' && cardCategory !== category);
+        });
+    }
+
+    function populateGrid() {
+        aiTools.forEach(tool => {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'card-wrapper';
+            wrapper.dataset.category = tool.category;
+
+            const card = document.createElement('div');
+            card.className = 'card bg-white rounded-xl shadow-md p-5 h-full flex flex-col cursor-pointer hover:bg-slate-50';
+            card.innerHTML = `
+                <div class="flex items-center mb-3">
+                    <span class="text-3xl mr-3">${tool.icon}</span>
+                    <h3 class="text-lg font-bold text-slate-800">${tool.name}</h3>
+                </div>
+                <p class="text-slate-600 text-sm flex-grow">${tool.tagline}</p>`;
+            card.addEventListener('click', () => openModal(tool));
+            wrapper.appendChild(card);
+            toolGrid.appendChild(wrapper);
+        });
+    }
+
+    function openModal(tool) {
+        modalTitle.textContent = tool.name;
+        modalBody.innerHTML = `
+            <div class="space-y-6">
+                <div>
+                    <h4 class="font-semibold text-teal-700 mb-2">What it does:</h4>
+                    <p class="text-slate-600">${tool.description}</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-teal-700 mb-2">Key Technology:</h4>
+                    <div class="flex flex-wrap gap-2">
+                        ${tool.tech.map(t => `<span class="bg-slate-100 text-slate-700 text-xs font-medium px-2.5 py-1 rounded-full">${t}</span>`).join('')}
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-teal-700 mb-3">Example Use Cases:</h4>
+                    <div class="space-y-4">
+                        ${tool.useCases.map(uc => `
+                            <div class="p-4 bg-slate-50 rounded-lg border border-slate-200">
+                                <h5 class="font-semibold text-slate-700">${uc.title}</h5>
+                                <p class="text-slate-600 text-sm mt-1">${uc.text}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            </div>`;
+        modal.classList.remove('hidden');
+        modalBackdrop.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+            modalBackdrop.classList.add('opacity-100');
+            modal.querySelector('.modal-content').classList.remove('scale-95', 'opacity-0');
+            modal.querySelector('.modal-content').classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+
+    function closeModal() {
+        modal.querySelector('.modal-content').classList.add('scale-95', 'opacity-0');
+        modalBackdrop.classList.remove('opacity-100');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modalBackdrop.classList.add('hidden');
+            document.body.style.overflow = '';
+        }, 300);
+    }
+
+    function createChart() {
+        const ctx = document.getElementById('ecosystemChart').getContext('2d');
+        const counts = categories.slice(1).reduce((acc, cat) => {
+            acc[cat] = aiTools.filter(t => t.category === cat).length;
+            return acc;
+        }, {});
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(counts),
+                datasets: [{
+                    label: 'Tools per Category',
+                    data: Object.values(counts),
+                    backgroundColor: [
+                        'rgba(20, 184, 166, 0.7)',
+                        'rgba(14, 165, 233, 0.7)',
+                        'rgba(249, 115, 22, 0.7)',
+                        'rgba(139, 92, 246, 0.7)',
+                        'rgba(236, 72, 153, 0.7)'
+                    ],
+                    borderColor: [
+                        'rgb(15, 118, 110)',
+                        'rgb(2, 132, 199)',
+                        'rgb(234, 88, 12)',
+                        'rgb(124, 58, 237)',
+                        'rgb(219, 39, 119)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => `${ctx.label}: ${ctx.parsed} tools`
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    closeModalBtn.addEventListener('click', closeModal);
+    modalBackdrop.addEventListener('click', closeModal);
+
+    createFilters();
+    populateGrid();
+    createChart();
+});
+</script>
+
+</body>
+</html>
